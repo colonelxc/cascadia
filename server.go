@@ -29,8 +29,9 @@ type ConfigPerson struct {
 }
 
 type Config struct {
-	People       []ConfigPerson `json:"people"`
-	DatabasePath string         `json:"database_path"`
+	People        []ConfigPerson `json:"people"`
+	DatabasePath  string         `json:"database_path"`
+	ListenAddress string         `json:"listen_address"`
 }
 
 // State
@@ -165,7 +166,7 @@ func main() {
 	http.HandleFunc("/", s.handleIndex)
 	http.HandleFunc("/new", s.handleNewSample)
 	go s.periodicallyUpdate()
-	log.Fatal(http.ListenAndServe("127.0.0.1:9000", nil))
+	log.Fatal(http.ListenAndServe(s.config.ListenAddress, nil))
 }
 
 // polling code
