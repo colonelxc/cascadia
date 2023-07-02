@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cascadia Study Results Tracker</title>
+</head>
+
+<body>
+
+    <H1>Add new results</H1>
+
+    <form action="/new" method="post">
+        <label for="person">Who:</label>
+        <select id="person" , name="person">
+            {{range $p := .People}}
+            <option value="{{$p.Name}}">{{$p.Name}}</option>
+            {{end}}
+        </select>
+
+        <label for="barcode">Barcode:</label>
+        <input type="text" id="barcode" , name="barcode">
+
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+
+    <H1>Past results</H1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Barcode</th>
+                <th>Sample Date</th>
+                <th>Results</th>
+            </tr>
+            {{range $s := .Samples}}<tr>
+                <td>{{$s.Name}}</td>
+                <td>{{$s.Barcode}}</td>
+                <td>{{$s.SampleDate.String}}</td>
+                <td>{{$s.Results.String}}</td>
+            </tr>{{end}}
+        </thead>
+        <tbody>
+        <tbody>
